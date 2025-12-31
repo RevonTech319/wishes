@@ -1,0 +1,42 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.dark-mode {
+    background-color: #1a202c !important;
+    color: #f7fafc !important;
+}
+
+.dark-mode .bg-white {
+    background-color: #2d3748 !important;
+    color: white;
+}
+
+.dark-mode input, .dark-mode select {
+    background-color: #4a5568;
+    color: white;
+    border-color: #4a5568;
+}
+
+#wishCard {
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease;
+}
+
+/* Viral Animation for Button */
+@keyframes pulse-indigo {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+button:hover {
+    animation: pulse-indigo 2s infinite;
+}
+
+.ad-container {
+    max-width: 100%;
+    overflow: hidden;
+    margin: 10px 0;
+}
