@@ -2,119 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Wishes | Personalized Quotes & Wishes</title>
-    <meta name="description" content="Generate unlimited personalized wishes for Birthdays, New Year, Weddings and more in English and Kiswahili.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Smart Wishes | Premium Personalized Quotes</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- html2canvas for image saving -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 transition-colors duration-300" id="body">
+<body>
 
-    <!-- Top AdsTerra Banner -->
-    <div class="ad-container py-2 text-center bg-white shadow-sm">
-        <span class="text-[10px] text-gray-400 block">Sponsored</span>
-        <!-- REPLACE WITH YOUR ADSTERRA CODE -->
-        <div id="at-top-banner" class="min-h-[50px] bg-gray-100 flex items-center justify-center">
-            <p class="text-xs italic">AdsTerra Top Banner (728x90 or 320x50)</p>
+    <!-- Top AdsTerra Placement -->
+    <div class="ad-top-wrapper">
+        <span class="ad-label">Sponsored</span>
+        <div class="ad-container">
+            <!-- YOUR ADSTERRA CODE -->
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'fbd62674de117d62f8a92f8b01935dea',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/fbd62674de117d62f8a92f8b01935dea/invoke.js"></script>
         </div>
     </div>
 
-    <!-- Header -->
-    <header class="p-4 flex justify-between items-center max-w-2xl mx-auto">
-        <h1 class="text-2xl font-bold text-indigo-600">Smart Wishes ✨</h1>
-        <button id="themeToggle" class="p-2 rounded-full bg-gray-200">🌓</button>
-    </header>
+    <!-- Music Control -->
+    <div class="music-controller" onclick="toggleMusic()">
+        <div id="music-wave" class="wave-icon">
+            <span></span><span></span><span></span>
+        </div>
+        <audio id="bg-audio" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
-    <main class="p-4 max-w-2xl mx-auto space-y-6">
-        
-        <!-- Generator Card -->
-        <section class="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
-            <div class="grid grid-cols-2 gap-3 mb-4">
-                <div class="col-span-2">
-                    <label class="block text-sm font-medium mb-1">Select Occasion</label>
-                    <select id="occasion" class="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500">
-                        <option value="birthday">🎂 Birthday</option>
-                        <option value="new_year">🎆 New Year</option>
-                        <option value="wedding">💍 Wedding</option>
-                        <option value="graduation">🎓 Graduation</option>
-                        <option value="anniversary">💑 Anniversary</option>
-                        <option value="motivation">🔥 Motivation</option>
-                        <option value="love">❤️ Love & Friendship</option>
-                    </select>
+    <main class="app-container">
+        <header class="main-header">
+            <h1>Smart Wishes <span>Pro</span></h1>
+            <p>Premium Personalised Greetings</p>
+        </header>
+
+        <!-- Form Section -->
+        <section class="generator-card">
+            <div class="input-group">
+                <label>Choose Occasion</label>
+                <select id="occasion">
+                    <option value="birthday">🎂 Birthday / Kuzaliwa</option>
+                    <option value="wedding">💍 Wedding / Harusi</option>
+                    <option value="love">❤️ Love & Friendship</option>
+                    <option value="motivation">🔥 Motivation / Hamasa</option>
+                    <option value="graduation">🎓 Graduation / Mahafali</option>
+                    <option value="anniversary">💑 Anniversary</option>
+                    <option value="new_year">🎆 New Year</option>
+                </select>
+            </div>
+
+            <div class="name-grid">
+                <div class="input-group">
+                    <label>Recipient Name</label>
+                    <input type="text" id="recipient" placeholder="To...">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Recipient Name</label>
-                    <input type="text" id="recipient" placeholder="To..." class="w-full p-3 rounded-xl border border-gray-300">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium mb-1">Your Name</label>
-                    <input type="text" id="sender" placeholder="From..." class="w-full p-3 rounded-xl border border-gray-300">
-                </div>
-                <div class="col-span-2">
-                    <label class="block text-sm font-medium mb-1">Language</label>
-                    <div class="flex gap-4">
-                        <label><input type="radio" name="lang" value="en" checked> English</label>
-                        <label><input type="radio" name="lang" value="sw"> Kiswahili</label>
-                    </div>
+                <div class="input-group">
+                    <label>Your Name</label>
+                    <input type="text" id="sender" placeholder="From...">
                 </div>
             </div>
 
-            <button onclick="generateWish()" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-indigo-700 transition transform active:scale-95 shadow-lg">
-                Generate Wish 🚀
-            </button>
+            <div class="lang-selector">
+                <button class="lang-btn active" data-lang="en">English</button>
+                <button class="lang-btn" data-lang="sw">Kiswahili</button>
+            </div>
+
+            <button class="generate-btn" onclick="generateWish()">Generate Magic ✨</button>
         </section>
 
-        <!-- AdsTerra Native Inline -->
-        <div class="ad-container text-center py-2">
-            <span class="text-[10px] text-gray-400 block">Sponsored Content</span>
-            <div id="at-inline-native" class="min-h-[100px] bg-gray-100 rounded-lg flex items-center justify-center">
-                 <p class="text-xs italic">AdsTerra Native Ad</p>
+        <!-- Native Ad Slot -->
+        <div class="native-ad-slot">
+            <span class="ad-tag">Recommended</span>
+            <div id="ad-native-placeholder">
+                <!-- Secondary Adsterra Code Here -->
             </div>
         </div>
 
         <!-- Result Display -->
-        <section id="resultArea" class="hidden space-y-4">
-            <div id="wishCard" class="p-8 rounded-2xl text-center shadow-inner min-h-[200px] flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
-                <p id="wishText" class="text-xl font-medium leading-relaxed z-10">Your message will appear here...</p>
-                <p id="wishSignature" class="mt-4 opacity-90 italic z-10"></p>
+        <section id="result-section" class="hidden">
+            <div id="quote-card-display" class="pro-quote-card">
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <p id="quote-text" class="quote-main">Your wish will appear here...</p>
+                    <span id="quote-from" class="quote-author"></span>
+                </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="grid grid-cols-2 gap-3">
-                <button onclick="shareWhatsApp()" class="flex items-center justify-center gap-2 bg-green-500 text-white p-3 rounded-xl font-bold">
-                    WhatsApp
-                </button>
-                <button onclick="copyToClipboard()" class="flex items-center justify-center gap-2 bg-gray-800 text-white p-3 rounded-xl font-bold">
-                    📋 Copy Text
-                </button>
-                <button onclick="downloadImage()" class="flex items-center justify-center gap-2 bg-blue-600 text-white p-3 rounded-xl font-bold">
-                    🖼️ Save Image
-                </button>
-                <button onclick="shareLink()" class="flex items-center justify-center gap-2 bg-pink-500 text-white p-3 rounded-xl font-bold">
-                    🔗 Share Link
-                </button>
+            <div class="action-grid">
+                <button class="action-btn wa" onclick="shareWhatsApp()">WhatsApp</button>
+                <button class="action-btn download" onclick="saveImage()">Save HD Image</button>
+                <button class="action-btn copy" onclick="copyText()">Copy Text</button>
+                <button class="action-btn share" onclick="shareNative()">Share Link</button>
             </div>
         </section>
-
     </main>
 
     <!-- Sticky Bottom Ad -->
-    <div class="fixed bottom-0 left-0 w-full bg-white border-t p-1 z-50 shadow-2xl">
-        <span class="text-[9px] text-gray-400 text-center block">Sponsored</span>
-        <div id="at-sticky-footer" class="h-[50px] flex items-center justify-center">
-            <!-- REPLACE WITH ADSTERRA 320x50 MOBILE BANNER -->
-            <p class="text-xs">Sticky Mobile Ad Placement</p>
+    <footer class="sticky-footer">
+        <div class="ad-footer-container">
+            <!-- Adsterra 320x50 Script Here -->
+            <p class="text-xs">Sponsored Content</p>
         </div>
-    </div>
-
-    <footer class="pb-24 pt-10 text-center text-gray-500 text-sm">
-        <div class="flex justify-center gap-4 mb-2">
-            <a href="#">About</a> | <a href="#">Daily Quotes</a> | <a href="#">Privacy</a>
-        </div>
-        <p>© 2024 Smart Wishes. Made for ❤️</p>
     </footer>
 
     <script src="script.js"></script>
